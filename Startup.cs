@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using zad3.Data;
 
 namespace zad3
 {
@@ -23,6 +25,8 @@ namespace zad3
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BuzzFizzContext>(options =>
+           { options.UseSqlServer(Configuration.GetConnectionString("FizzBuzz")); });
             services.AddRazorPages();
             services.AddSession();
         }

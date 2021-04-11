@@ -1,0 +1,10 @@
+﻿@page
+@model zad3.Pages.ListaSzukModel
+@{
+    @foreach (var item in Model.BF)
+    {
+    <p>Nr: @{ Model.a++; }@Model.a Dane: @item.ToString() Data: @item.date</p>
+    <br />
+        }
+    <a class="btn btn-primary" asp-area="" asp-page="/Index">Powrót</a>
+}

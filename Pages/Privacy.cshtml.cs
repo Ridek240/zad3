@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 
+
 namespace zad3.Pages
 {
     public class PrivacyModel : PageModel
     {
+        
         public String BuzzFizz { get; set; }
         public String Data { get; set; }
         public void OnGet()
