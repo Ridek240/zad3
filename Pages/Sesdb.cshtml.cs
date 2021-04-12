@@ -25,5 +25,19 @@ namespace zad3.Pages
             BF = FizzBuzzQuerry.ToList();
 
         }
+        public IActionResult OnPost(int itemID)
+        {
+            DelFizz(itemID);
+            return RedirectToPage("./Sesdb");
+        }
+        public void DelFizz(int n)
+        {
+            var FizzBuzzQuerry = (from BuzzFizz in _cont.BuzzFizz where BuzzFizz.Id == n && BuzzFizz.historical == false orderby BuzzFizz.date descending select BuzzFizz).FirstOrDefault();
+            if(FizzBuzzQuerry!=null)
+            {
+                _cont.BuzzFizz.Remove(FizzBuzzQuerry);
+                _cont.SaveChanges();
+            }
+        }
     }
 }

@@ -36,18 +36,32 @@ namespace zad3.Pages
         {
             if (ModelState.IsValid)
             {
+                AddFizz();
                 BuzzFizz fizzbuzz = new BuzzFizz(BuzzFizzNum);
-                _cont.BuzzFizz.Add(fizzbuzz);
+                
                 HttpContext.Session.SetString("BuzzFizz", fizzbuzz.ToString());
                 HttpContext.Session.SetString("Data", fizzbuzz.date.ToString());
-                _cont.SaveChanges();
+                
                 return RedirectToPage("./Sesdb");
             }
             return Page();
         }
         public void AddFizz()
         {
+            var FizzBuzzQuerry = (from BuzzFizz in _cont.BuzzFizz where BuzzFizz.historical == false orderby BuzzFizz.date descending select BuzzFizz).Take(10);
+            int liczba = FizzBuzzQuerry.Count();
+            if (liczba >= 10)
+            {
+                var FizzBuzzLast = FizzBuzzQuerry.LastOrDefault();
 
+                if (FizzBuzzLast != null)
+                    FizzBuzzLast.historical = true;
+            }
+                BuzzFizz fizzbuzz = new BuzzFizz(BuzzFizzNum);
+               
+                _cont.BuzzFizz.Add(fizzbuzz);
+                _cont.SaveChanges();
+            
         }
     }
 }
